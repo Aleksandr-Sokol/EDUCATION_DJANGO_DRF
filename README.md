@@ -13,6 +13,10 @@ python manage.py startapp <имя приложения>
 ### запустить миграцию базы данных
 python manage.py migrate
 
+### последующие миграции 
+python manage.py  makemigrations <имя приложения>
+python manage.py migrate
+
 ### создать суперпользователя
 python.exe manage.py createsuperuser
 http://127.0.0.1:8000/admin/login/
