@@ -5,6 +5,8 @@ django-redis
 django-rest-auth
 djangorestframework
 djangorestframework_simplejwt
+django-stubs
+django-environ
 celery
 pytest
 pytest-celery
