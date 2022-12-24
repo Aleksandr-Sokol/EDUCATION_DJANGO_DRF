@@ -30,7 +30,6 @@ class Product(models.Model):
 
 
 class Clothes(Product):
-    title = models.CharField(max_length=90, blank=False)
 
     class Meta:
         db_table = "clothes"
