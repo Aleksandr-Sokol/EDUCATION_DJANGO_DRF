@@ -56,5 +56,5 @@ class Price(models.Model):
         verbose_name = "Цена на текущее время"
 
     def __str__(self):  # отображения модели
-        return self.title
+        return f'{self.value}'
 
