@@ -12,14 +12,31 @@ class BrandListSerializer(serializers.ModelSerializer):
 
 
 class ClothesListSerializer(serializers.ModelSerializer):
-    brand = BrandListSerializer()
+    """
+    Переоределен метод create, что бы автоматически создавать и привязывать бренд к одежде
+    brand=BrandListSerializer(read_only=True) используется только для get запроса
+    brand_data=serializers.JSONField(write_only=True) используется только для post запроса. В get запросе не применяется
+    """
+    brand = BrandListSerializer(read_only=True)
+    brand_data = serializers.JSONField(write_only=True)
 
     class Meta:
         model = Clothes
-        fields = ['title', 'size', 'brand']
+        fields = ['title', 'size', 'brand', 'brand_data']
+
+    def create(self, validated_data):
+        brand_data: dict = validated_data.pop('brand_data')
+        brand, is_created = Brand.objects.get_or_create(**brand_data)
+        clothes = Clothes(**validated_data)
+        clothes.brand = brand
+        clothes.save()
+        return clothes
 
 
 class PriceListSerializer(serializers.ModelSerializer):
+    """
+    middle_price при ответе автоматически вычисляется средняя цена
+    """
     clothes = ClothesListSerializer()
     middle_price = serializers.SerializerMethodField()
 
@@ -35,3 +52,13 @@ class PriceListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Price
         fields = ['value', 'date', 'clothes', 'middle_price']
+
+
+class RequestJournalSerializer(serializers.Serializer):
+    """
+    Устаревший метод серилизатора, но возможно более быстрый
+    """
+    date = serializers.DateField()
+    request = serializers.CharField(max_length=1000)
+    response_code = serializers.IntegerField()
+    response_message = serializers.CharField(max_length=1000)
