@@ -58,3 +58,16 @@ class Price(models.Model):
     def __str__(self):  # отображения модели
         return f'{self.value}'
 
+
+class RequestJournal(models.Model):
+    date = models.DateField(auto_now_add=True)
+    request = models.TextField()
+    response_code = models.IntegerField()
+    response_message = models.TextField()
+
+    class Meta:
+        db_table = "request_journal"
+        verbose_name = "Журнал запросов"
+
+    def __str__(self):  # отображения модели
+        return f'{self.request}'
