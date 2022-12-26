@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Price, Brand, Clothes
+from .models import Price, Brand, Clothes, RequestJournal
 
 
 @admin.register(Brand)
@@ -15,3 +15,8 @@ class ClothesAdmin(admin.ModelAdmin):
 @admin.register(Price)
 class PriceAdmin(admin.ModelAdmin):
     list_display = ('value', 'date', 'clothes')
+
+
+@admin.register(RequestJournal)
+class RequestJournalAdmin(admin.ModelAdmin):
+    list_display = ('date', 'request', 'response_code', 'request_method')

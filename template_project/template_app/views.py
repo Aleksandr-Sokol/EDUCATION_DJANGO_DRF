@@ -54,4 +54,4 @@ class RequestJournalView(APIView):
     def get(self, request):
         request_journal = RequestJournal.objects.all()
         serializer = RequestJournalSerializer(request_journal, many=True)
-        return Response({"articles": serializer.data})
+        return Response({"Requests": serializer.data})

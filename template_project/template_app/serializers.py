@@ -61,4 +61,4 @@ class RequestJournalSerializer(serializers.Serializer):
     date = serializers.DateField()
     request = serializers.CharField(max_length=1000)
     response_code = serializers.IntegerField()
-    response_message = serializers.CharField(max_length=1000)
+    request_method = serializers.CharField(max_length=5)
