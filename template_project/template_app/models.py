@@ -62,8 +62,8 @@ class Price(models.Model):
 class RequestJournal(models.Model):
     date = models.DateField(auto_now_add=True)
     request = models.CharField(max_length=1000)
-    response_code = models.IntegerField()
-    response_message = models.CharField(max_length=1000)
+    response_code = models.IntegerField(blank=True, null=True)
+    request_method = models.CharField(max_length=5)
 
     class Meta:
         db_table = "request_journal"
