@@ -28,3 +28,17 @@ python manage.py runserver 127.0.0.1:8000
 
 ### Страница администратора
 http://127.0.0.1:8000/admin/
+
+### Установка swagger (django-rest-swagger)
+
+https://django-rest-swagger.readthedocs.io/en/latest/
+
+Ошибка: django.template.exceptions.TemplateSyntaxError: 'staticfiles' is not a registered tag library. Must be one of:...
+
+Решение: Добавить 'libraries': {
+                'staticfiles': 'django.templatetags.static',
+            },
+В TEMPLATES (settings.py)
+
+Другой swagger:
+https://drf-yasg.readthedocs.io/en/stable/readme.html#quickstart
